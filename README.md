@@ -34,3 +34,25 @@ What I plan to do:
 What I don't plan to do: Make a full-fledged, self-contained,
 auto-everything service out of it (yet).
 
+
+# What I did
+
+* Set up a local `RUNNABLE` folder for testing.
+* Set up a Python3 virtualenv for the dependencies my code will have:
+  `virtualenv venv`
+* Activate the virtualenve: `source venv/bin/activate`
+* Install dependencies (from PyPI this time; perhaps from-source is
+  preferable for a fast-moving thing like K8s?)
+  * [MaxMind geoip2](https://github.com/maxmind/GeoIP2-python)
+  * [Python Kubernetes client](https://github.com/kubernetes-client/python)
+```
+pip3 install geoip2
+pip3 install kubernetes
+```
+* `python -c 'import kubernetes ; import geoip2' && echo We are good to go!`
+
+There is some example code for the K8S Python bindings; the effort lies
+in recognizing and selecting the right ((non-)namespaced etc.) methods:
+* https://github.com/kubernetes-client/python/tree/master/examples
+* https://github.com/kubernetes-client/python/blob/master/examples/manage_node_labels.py
+
