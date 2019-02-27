@@ -56,3 +56,16 @@ in recognizing and selecting the right ((non-)namespaced etc.) methods:
 * https://github.com/kubernetes-client/python/tree/master/examples
 * https://github.com/kubernetes-client/python/blob/master/examples/manage_node_labels.py
 
+* We should look for the value of the `kubernetes.io/hostname` label
+  and resolve that to an IP address. There are other `address` labels
+  (e.g. under the `status` key of a `NodeList` item), but from visual
+  inspection they look less reliable (e.g. contain private IPv4 addresses).
+* MaxMind GeoLite2 databases are available via [their download page](https://dev.maxmind.com/geoip/geoip2/geolite2/)
+  -- note licensing conditions!
+  * https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz
+  * https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz
+* Let's use the `City` database which maps IP addresses to
+  * `location.latitude`, `location.longitude` (geo coordinates),
+  * `city.names["en"]` (name of City in English),
+  * `country.iso_code` (two-letter ISO country code)
+  * `continent.code` (two-letter continent code)
